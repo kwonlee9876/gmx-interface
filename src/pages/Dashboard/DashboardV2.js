@@ -515,14 +515,9 @@ export default function DashboardV2() {
               <Trans>Stats</Trans> <img width="24" src={currentIcons.network} alt="Network Icon" />
             </div>
             <div className="Page-description">
-              <Trans>
-                {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:
-              </Trans>{" "}
-              {chainId === ARBITRUM && <ExternalLink href="https://stats.gmx.io">https://stats.gmx.io</ExternalLink>}
-              {chainId === AVALANCHE && (
-                <ExternalLink href="https://stats.gmx.io/avalanche">https://stats.gmx.io/avalanche</ExternalLink>
-              )}
-              .
+              <p>
+              Decentralized Perpetual Exchange on zksync
+              </p>
             </div>
           </div>
         </div>
