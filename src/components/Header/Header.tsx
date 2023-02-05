@@ -4,7 +4,7 @@ import cx from "classnames";
 import { AppHeaderUser } from "./AppHeaderUser";
 import { AppHeaderLinks } from "./AppHeaderLinks";
 
-import logoImg from "img/logo_GMX.svg";
+import logoImg from "img/Anyswap.png";
 import logoSmallImg from "img/logo_GMX_small.svg";
 import { RiMenuLine } from "react-icons/ri";
 import { FaTimes } from "react-icons/fa";
