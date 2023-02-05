@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "components/Footer/Footer";
-import "./Home.css";
+import "../Home/Home.css";
 
 import simpleSwapIcon from "img/ic_simpleswaps.svg";
 import costIcon from "img/ic_cost.svg";
