@@ -144,9 +144,9 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
           <div className="Home-title-section">
             <div className="Home-title">
               <Trans>
-                Decentralized
+                Perpetual DEX
                 <br />
-                Perpetual Exchange
+                on zkSync
               </Trans>
             </div>
             <div className="Home-description">
