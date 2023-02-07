@@ -143,11 +143,11 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
         <div className="Home-title-section-container default-container">
           <div className="Home-title-section">
             <div className="Home-title">
-              <Trans>
+              <p>
               Perpetual DEX
                 <br />
                 ON ZKSYNC
-              </Trans>
+              </p>
             </div>
             <div className="Home-description">
               <Trans>
