@@ -151,7 +151,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             </div>
             <div className="Home-description">
               <Trans>
-                Trade BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet
+              ZKMX is a zkRollup based DEX, launchpad, farming platform built on zkSync and Polygon.
               </Trans>
             </div>
             <LaunchExchangeButton />
