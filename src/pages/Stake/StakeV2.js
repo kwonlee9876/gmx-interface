@@ -1458,14 +1458,15 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
           </div>
           <div className="Page-description">
             <Trans>
-              Stake <ExternalLink href="https://gmxio.gitbook.io/gmx/tokenomics">ZKMX</ExternalLink> and{" "}
-              <ExternalLink href="https://gmxio.gitbook.io/gmx/glp">ZKLP</ExternalLink> to earn rewards.
+              coming soon.
+              {/* Stake <ExternalLink href="https://gmxio.gitbook.io/gmx/tokenomics">ZKMX</ExternalLink> and{" "}
+              <ExternalLink href="https://gmxio.gitbook.io/gmx/glp">ZKLP</ExternalLink> to earn rewards. */}
             </Trans>
           </div>
           {earnMsg && <div className="Page-description">{earnMsg}</div>}
         </div>
       </div>
-      <div className="StakeV2-content">
+      {/* <div className="StakeV2-content">
         <div className="StakeV2-cards">
           <div className="App-card StakeV2-gmx-card">
             <div className="App-card-title">GMX</div>
@@ -2000,9 +2001,9 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <div className="Tab-title-section">
           <div className="Page-title">
             <Trans>Vest</Trans>
@@ -2222,7 +2223,7 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </div>
   );
