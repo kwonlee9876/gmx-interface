@@ -33,11 +33,7 @@ const HOME_MENUS: HomeLink[] = [
   {
     label: t`Voting`,
     link: "https://snapshot.org/#/gmx.eth",
-  },
-  {
-    label: t`Docs`,
-    link: "https://gmxio.gitbook.io/gmx/",
-  },
+  }
 ];
 
 export function HomeHeaderLinks({ small, clickCloseIcon, redirectPopupTimestamp, showRedirectModal }: Props) {
