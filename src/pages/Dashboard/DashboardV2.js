@@ -233,7 +233,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
           </div>
         </div>
       </div>
-      <div className="Home-cta-section">
+      {/* <div className="Home-cta-section">
         <div className="Home-cta-container default-container">
           <div className="Home-cta-info">
             <div className="Home-cta-info__title">
@@ -268,7 +268,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="Home-token-card-section">
         <div className="Home-token-card-container default-container">
           <div className="Home-token-card-info">
