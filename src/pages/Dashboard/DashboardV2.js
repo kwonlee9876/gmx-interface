@@ -157,7 +157,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             <LaunchExchangeButton />
           </div>
         </div>
-        <div className="Home-latest-info-container default-container">
+        {/* <div className="Home-latest-info-container default-container">
           <div className="Home-latest-info-block">
             <img src={tradingIcon} alt="Total Trading Volume Icon" className="Home-latest-info__icon" />
             <div className="Home-latest-info-content">
@@ -185,7 +185,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
               <div className="Home-latest-info__value">{numberWithCommas(totalUsers.toFixed(0))}</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="Home-benefits-section">
         <div className="Home-benefits default-container">
