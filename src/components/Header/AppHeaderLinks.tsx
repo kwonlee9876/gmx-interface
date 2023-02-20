@@ -76,11 +76,11 @@ export function AppHeaderLinks({
           <Trans>Ecosystem</Trans>
         </HeaderLink>
       </div>
-      <div className="App-header-link-container">
+      {/* <div className="App-header-link-container">
         <ExternalLink href="https://gmxio.gitbook.io/gmx/">
           <Trans>Docs</Trans>
         </ExternalLink>
-      </div>
+      </div> */}
       {small && !isHomeSite() && (
         <div className="App-header-link-container">
           {/* eslint-disable-next-line */}
