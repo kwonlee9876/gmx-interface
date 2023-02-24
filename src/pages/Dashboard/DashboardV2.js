@@ -193,13 +193,12 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             <div className="Home-benefit-icon">
               <img src={liquidityIcon} alt="Reduce Liquidation Risks Icon" className="Home-benefit-icon-symbol" />
               <div className="Home-benefit-title">
-                <Trans>Whitelist Ticket NFT</Trans>
+                <Trans>Whitelist Ticket NFT on Manifold</Trans>
               </div>
             </div>
             <div className="Home-benefit-description">
               <Trans>
-                An aggregate of high-quality price feeds determine when liquidations occur. This keeps positions safe
-                from temporary wicks.
+                We'll be announcing whitelist ticket NFT soon.
               </Trans>
             </div>
           </div>
@@ -207,13 +206,12 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             <div className="Home-benefit-icon">
               <img src={costIcon} alt="Save on Costs Icon" className="Home-benefit-icon-symbol" />
               <div className="Home-benefit-title">
-                <Trans>Save on Costs</Trans>
+                <Trans>Ordinals NFT</Trans>
               </div>
             </div>
             <div className="Home-benefit-description">
               <Trans>
-                Enter and exit positions with minimal spread and zero price impact. Get the optimal price without
-                incurring additional costs.
+                Ordinals NFT drop opportunities will be available among whitelisted NFT ticket holders.
               </Trans>
             </div>
           </div>
@@ -221,13 +219,12 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             <div className="Home-benefit-icon">
               <img src={simpleSwapIcon} alt="Simple Swaps Icon" className="Home-benefit-icon-symbol" />
               <div className="Home-benefit-title">
-                <Trans>Simple Swaps</Trans>
+                <Trans>Powered by zkSync Era</Trans>
               </div>
             </div>
             <div className="Home-benefit-description">
               <Trans>
-                Open positions through a simple swap interface. Conveniently swap from any supported asset into the
-                position of your choice.
+                Enjoy unlimited trading experience with zkSync Era.
               </Trans>
             </div>
           </div>
