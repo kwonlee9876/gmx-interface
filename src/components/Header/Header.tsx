@@ -5,7 +5,7 @@ import { AppHeaderUser } from "./AppHeaderUser";
 import { AppHeaderLinks } from "./AppHeaderLinks";
 
 import logoImg from "img/zkmx.png";
-import logoSmallImg from "img/logo_GMX_small.svg";
+import logoSmallImg from "img/zkmx.png";
 import { RiMenuLine } from "react-icons/ri";
 import { FaTimes } from "react-icons/fa";
 import { AnimatePresence as FramerAnimatePresence, motion } from "framer-motion";
