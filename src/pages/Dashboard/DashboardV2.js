@@ -193,7 +193,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             <div className="Home-benefit-icon">
               <img src={liquidityIcon} alt="Reduce Liquidation Risks Icon" className="Home-benefit-icon-symbol" />
               <div className="Home-benefit-title">
-                <Trans>Reduce Liquidation Risks</Trans>
+                <Trans>Whitelist Ticket NFT</Trans>
               </div>
             </div>
             <div className="Home-benefit-description">
