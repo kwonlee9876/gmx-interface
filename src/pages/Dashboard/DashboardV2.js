@@ -211,7 +211,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             </div>
             <div className="Home-benefit-description">
               <Trans>
-                Ordinals NFT drop will be available among whitelisted NFT ticket holders.
+                Ordinals NFT drop will be available for NFT ticket holders.
               </Trans>
             </div>
           </div>
