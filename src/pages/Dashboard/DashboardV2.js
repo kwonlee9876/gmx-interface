@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "components/Footer/Footer";
 import "../Home/Home.css";
 
-import simpleSwapIcon from "img/ic_simpleswaps.svg";
+import simpleSwapIcon from "img/lightning-96x96-5388057.png";
 import costIcon from "img/ic_cost.svg";
 import liquidityIcon from "img/ic_liquidity.svg";
 import totaluserIcon from "img/ic_totaluser.svg";
