@@ -4,7 +4,7 @@ import "../Home/Home.css";
 
 import simpleSwapIcon from "img/lightning-96x96-5388057.png";
 import costIcon from "img/ic_cost.svg";
-import liquidityIcon from "img/ic_liquidity.svg";
+import liquidityIcon from "img/check-double-32x32-5388030.png";
 import totaluserIcon from "img/ic_totaluser.svg";
 
 import statsIcon from "img/ic_stats.svg";
