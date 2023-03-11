@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "components/Footer/Footer";
 import "../Home/Home.css";
-import abi from '../../utils/BuyMeCoffee.json';
+// import abi from '../../utils/BuyMeCoffee.json';
 import { ethers } from "ethers";
 import zkmxLogo from "img/zkmx.png";
 import simpleSwapIcon from "img/lightning-32x32-5388057.png";
@@ -56,7 +56,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
   // ARBITRUM
 
   const contractAddress = "0xDBa03676a2fBb6711CB652beF5B7416A53c1421D";
-  const contractABI = abi.abi;
+//   const contractABI = abi.abi;
 
   // Component state
   const [currentAccount, setCurrentAccount] = useState("");
@@ -193,39 +193,39 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
     }
   }
 
-  const buyCoffee = async () => {
-    try {
-      const {ethereum} = window;
+//   const buyCoffee = async () => {
+//     try {
+//       const {ethereum} = window;
 
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum, "any");
-        const signer = provider.getSigner();
-        const buyMeACoffee = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
+//       if (ethereum) {
+//         const provider = new ethers.providers.Web3Provider(ethereum, "any");
+//         const signer = provider.getSigner();
+//         const buyMeACoffee = new ethers.Contract(
+//           contractAddress,
+//           contractABI,
+//           signer
+//         );
 
-        console.log("bidding..")
-        const coffeeTxn = await buyMeACoffee.buyCoffee(
-          message ? message : "Address to receive Ordinal inscription",
-          {value: ethers.utils.parseEther("0.001")}
-        );
+//         console.log("bidding..")
+//         const coffeeTxn = await buyMeACoffee.buyCoffee(
+//           message ? message : "Address to receive Ordinal inscription",
+//           {value: ethers.utils.parseEther("0.001")}
+//         );
 
-        await coffeeTxn.wait();
+//         await coffeeTxn.wait();
 
-        console.log("mined ", coffeeTxn.hash);
+//         console.log("mined ", coffeeTxn.hash);
 
-        console.log("coffee purchased!");
+//         console.log("coffee purchased!");
 
-        // Clear the form fields.
-        setName("");
-        setMessage("");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//         // Clear the form fields.
+//         setName("");
+//         setMessage("");
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
 
   const getMemos = async () => {
     try {
