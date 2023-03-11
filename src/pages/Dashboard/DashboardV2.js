@@ -230,14 +230,14 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
   const getMemos = async () => {
     try {
       const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const buyMeACoffee = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
+//       if (ethereum) {
+//         const provider = new ethers.providers.Web3Provider(ethereum);
+//         const signer = provider.getSigner();
+//         const buyMeACoffee = new ethers.Contract(
+//           contractAddress,
+//           contractABI,
+//           signer
+//         );
 
         console.log("fetching memos from the blockchain..");
         const memos = await buyMeACoffee.getMemos();
@@ -276,17 +276,17 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
     const {ethereum} = window;
 
     // Listen for new memo events.
-    if (ethereum) {
-      const provider = new ethers.providers.Web3Provider(ethereum, "any");
-      const signer = provider.getSigner();
-      buyMeACoffee = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        signer
-      );
+//     if (ethereum) {
+//       const provider = new ethers.providers.Web3Provider(ethereum, "any");
+//       const signer = provider.getSigner();
+//       buyMeACoffee = new ethers.Contract(
+//         contractAddress,
+//         contractABI,
+//         signer
+//       );
 
-      buyMeACoffee.on("NewMemo", onNewMemo);
-    }
+//       buyMeACoffee.on("NewMemo", onNewMemo);
+//     }
 
     return () => {
       if (buyMeACoffee) {
