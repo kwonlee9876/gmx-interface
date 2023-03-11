@@ -240,7 +240,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
 //         );
 
         console.log("fetching memos from the blockchain..");
-        const memos = await buyMeACoffee.getMemos();
+//         const memos = await buyMeACoffee.getMemos();
         console.log("fetched!");
         setMemos(memos);
       } else {
