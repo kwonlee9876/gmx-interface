@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "components/Footer/Footer";
 import "../Home/Home.css";
-
+import abi from '../../utils/BuyMeCoffee.json';
+import { ethers } from "ethers";
+import zkmxLogo from "img/zkmx.png";
 import simpleSwapIcon from "img/lightning-32x32-5388057.png";
 import costIcon from "img/calendar-check-32x32-5388026.png";
 import liquidityIcon from "img/layer-32x32-5388055.png";
@@ -27,34 +29,41 @@ import { getServerUrl } from "config/backend";
 import { bigNumberify, formatAmount, numberWithCommas } from "lib/numbers";
 
 export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
-  // const [openedFAQIndex, setOpenedFAQIndex] = useState(null)
-  // const faqContent = [{
-  //   id: 1,
-  //   question: "What is GMX?",
-  //   answer: "GMX is a decentralized spot and perpetual exchange that supports low swap fees and zero price impact trades.<br><br>Trading is supported by a unique multi-asset pool that earns liquidity providers fees from market making, swap fees, leverage trading (spreads, funding fees & liquidations), and asset rebalancing.<br><br>Dynamic pricing is supported by Chainlink Oracles along with TWAP pricing from leading volume DEXs."
-  // }, {
-  //   id: 2,
-  //   question: "What is the GMX Governance Token? ",
-  //   answer: "The GMX token is the governance token of the GMX ecosystem, it provides the token owner voting rights on the direction of the GMX platform.<br><br>Additionally, when GMX is staked you will earn 30% of the platform-generated fees, you will also earn Escrowed GMX tokens and Multiplier Points."
-  // }, {
-  //   id: 3,
-  //   question: "What is the GLP Token? ",
-  //   answer: "The GLP token represents the liquidity users provide to the GMX platform for Swaps and Margin Trading.<br><br>To provide liquidity to GLP you <a href='https://gmx.io/buy_glp' target='_blank'>trade</a> your crypto asset BTC, ETH, LINK, UNI, USDC, USDT, MIM, or FRAX to the liquidity pool, in exchange, you gain exposure to a diversified index of tokens while earning 50% of the platform trading fees and esGMX."
-  // }, {
-  //   id: 4,
-  //   question: "What can I trade on GMX? ",
-  //   answer: "On GMX you can swap or margin trade any of the following assets: ETH, BTC, LINK, UNI, USDC, USDT, MIM, FRAX, with others to be added. "
-  // }]
+  const [openedFAQIndex, setOpenedFAQIndex] = useState(null)
+  const faqContent = [{
+    id: 1,
+    question: "Impermanent loss risk",
+    answer: " Provide liquidity for tokens with lower volatility or invest in AMM pools that use stablecoins.<br><br>\n" +
+      "Use strategies such as impermanent loss insurance or portfolio rebalancing to minimize losses."
+  }, {
+    id: 2,
+    question: "Price slippage risk",
+    answer: "Protocol monitors the liquidity on the exchange and ensure there is sufficient liquidity before making trades.<br><br>Protocol uses limit orders instead of market orders to avoid unexpected price changes."
+  }, {
+    id: 3,
+    question: "Oracle risk",
+    answer: "zkMX uses a 3rd party oracle whereas GMX uses its own off-chain oracle to directly fetch price information from high-volume exchanges<br><br>"
+  }]
 
-  // const toggleFAQContent = function(index) {
-  //   if (openedFAQIndex === index) {
-  //     setOpenedFAQIndex(null)
-  //   } else {
-  //     setOpenedFAQIndex(index)
-  //   }
-  // }
+  const toggleFAQContent = function(index) {
+    if (openedFAQIndex === index) {
+      setOpenedFAQIndex(null)
+    } else {
+      setOpenedFAQIndex(index)
+    }
+  }
 
   // ARBITRUM
+
+  const contractAddress = "0xDBa03676a2fBb6711CB652beF5B7416A53c1421D";
+  const contractABI = abi.abi;
+
+  // Component state
+  const [currentAccount, setCurrentAccount] = useState("");
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [memos, setMemos] = useState([]);
+  const [value, setValue] = useState("");
 
   const arbitrumPositionStatsUrl = getServerUrl(ARBITRUM, "/position_stats");
   const { data: arbitrumPositionStats } = useSWR([arbitrumPositionStatsUrl], {
@@ -127,7 +136,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
     return (
       <HeaderLink
         className="default-btn"
-        to="/trade"
+        to="/dashboard"
         redirectPopupTimestamp={redirectPopupTimestamp}
         showRedirectModal={showRedirectModal}
       >
@@ -135,6 +144,156 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
       </HeaderLink>
     );
   };
+
+  const onValueChange = (event) => {
+    setValue(event.target.value)
+  }
+  const onNameChange = (event) => {
+    setName(event.target.value);
+  }
+
+  const onMessageChange = (event) => {
+    setMessage(event.target.value);
+  }
+
+  // Wallet connection logic
+  const isWalletConnected = async () => {
+    try {
+      const { ethereum } = window;
+
+      const accounts = await ethereum.request({method: 'eth_accounts'})
+      console.log("accounts: ", accounts);
+
+      if (accounts.length > 0) {
+        const account = accounts[0];
+        console.log("wallet is connected! " + account);
+      } else {
+        console.log("make sure MetaMask is connected");
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
+
+  const connectWallet = async () => {
+    try {
+      const {ethereum} = window;
+
+      if (!ethereum) {
+        console.log("please install MetaMask");
+      }
+
+      const accounts = await ethereum.request({
+        method: 'eth_requestAccounts'
+      });
+
+      setCurrentAccount(accounts[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const buyCoffee = async () => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum, "any");
+        const signer = provider.getSigner();
+        const buyMeACoffee = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        console.log("bidding..")
+        const coffeeTxn = await buyMeACoffee.buyCoffee(
+          message ? message : "Address to receive Ordinal inscription",
+          {value: ethers.utils.parseEther("0.001")}
+        );
+
+        await coffeeTxn.wait();
+
+        console.log("mined ", coffeeTxn.hash);
+
+        console.log("coffee purchased!");
+
+        // Clear the form fields.
+        setName("");
+        setMessage("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getMemos = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const buyMeACoffee = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        console.log("fetching memos from the blockchain..");
+        const memos = await buyMeACoffee.getMemos();
+        console.log("fetched!");
+        setMemos(memos);
+      } else {
+        console.log("Metamask is not connected");
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  useEffect(() => {
+    let buyMeACoffee;
+    isWalletConnected();
+    getMemos();
+
+    // Create an event handler function for when someone sends
+    // us a new memo.
+    const onNewMemo = (from, timestamp, name, message) => {
+      console.log("Memo received: ", from, timestamp, name, message);
+      setMemos((prevState) => [
+        ...prevState,
+        {
+          address: from,
+          timestamp: new Date(timestamp * 1000),
+          message,
+          name
+        }
+      ]);
+    };
+
+    const {ethereum} = window;
+
+    // Listen for new memo events.
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum, "any");
+      const signer = provider.getSigner();
+      buyMeACoffee = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      );
+
+      buyMeACoffee.on("NewMemo", onNewMemo);
+    }
+
+    return () => {
+      if (buyMeACoffee) {
+        buyMeACoffee.off("NewMemo", onNewMemo);
+      }
+    }
+  }, []);
 
   return (
     <div className="Home">
@@ -151,7 +310,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             </div>
             <div className="Home-description">
               <Trans>
-              ZKMX is a zkRollup based DEX, launchpad, farming platform built on zkSync and Polygon.
+                ZKMX is a zkRollup based DEX, launchpad, farming platform built on zkSync and Polygon.
               </Trans>
             </div>
             <LaunchExchangeButton />
@@ -206,12 +365,12 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             <div className="Home-benefit-icon">
               <img src={costIcon} alt="Save on Costs Icon" className="Home-benefit-icon-symbol" />
               <div className="Home-benefit-title">
-                <Trans>Ordinals NFT</Trans>
+                <Trans>$ZKS Airdrop</Trans>
               </div>
             </div>
             <div className="Home-benefit-description">
               <Trans>
-                Ordinals NFT drop will be available for NFT ticket holders.
+                $ZKS drop will be available for promotion winner.
               </Trans>
             </div>
           </div>
@@ -230,42 +389,50 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
           </div>
         </div>
       </div>
-      {/* <div className="Home-cta-section">
+
+      <div className="Home-cta-section">
         <div className="Home-cta-container default-container">
           <div className="Home-cta-info">
             <div className="Home-cta-info__title">
-              <Trans>Available on your preferred network</Trans>
+              <Trans>IFO rules</Trans>
             </div>
             <div className="Home-cta-info__description">
-              <Trans>ZKMX is currently live on zkSync and Polygon.</Trans>
+              <Trans>
+
+                 To be announced
+              </Trans>
             </div>
           </div>
           <div className="Home-cta-options">
             <div className="Home-cta-option Home-cta-option-arbitrum">
               <div className="Home-cta-option-icon">
-                <img src={arbitrumIcon} width="96" alt="Arbitrum Icon" />
+                <img src={zkmxLogo} width="96" alt="Arbitrum Icon" />
               </div>
               <div className="Home-cta-option-info">
-                <div className="Home-cta-option-title">Arbitrum</div>
+                <div className="Home-cta-option-title">$ZKMX</div>
                 <div className="Home-cta-option-action">
-                  <LaunchExchangeButton />
+                  <button
+                    className="default-btn"
+                    // onClick={buyCoffee}
+                  >
+                    TBA</button>
                 </div>
               </div>
             </div>
-            <div className="Home-cta-option Home-cta-option-ava">
-              <div className="Home-cta-option-icon">
-                <img src={avaxIcon} width="96" alt="Avalanche Icon" />
-              </div>
-              <div className="Home-cta-option-info">
-                <div className="Home-cta-option-title">Avalanche</div>
-                <div className="Home-cta-option-action">
-                  <LaunchExchangeButton />
-                </div>
-              </div>
-            </div>
+            {/*<div className="Home-cta-option Home-cta-option-ava">*/}
+            {/*  <div className="Home-cta-option-icon">*/}
+            {/*    <img src={avaxIcon} width="96" alt="Avalanche Icon" />*/}
+            {/*  </div>*/}
+            {/*  <div className="Home-cta-option-info">*/}
+            {/*    <div className="Home-cta-option-title">Avalanche</div>*/}
+            {/*    <div className="Home-cta-option-action">*/}
+            {/*      <LaunchExchangeButton />*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </div>
         </div>
-      </div> */}
+      </div>
 
 
       {/* <div className="Home-video-section">
@@ -275,12 +442,20 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
           </div>
         </div>
       </div> */}
-      <div className="Home-faqs-section">
+       <div className="Home-faqs-section">
         <div className="Home-faqs-container default-container">
           <div className="Home-faqs-introduction">
-            <div className="Home-faqs-introduction__title">FAQs</div>
-            <div className="Home-faqs-introduction__description">Most asked questions. If you wish to learn more, please head to our Documentation page.</div>
-            <a href="https://gmxio.gitbook.io/gmx/" className="default-btn Home-faqs-documentation">Documentation</a>
+            <div className="Home-faqs-introduction__title">Different approaches  </div>
+            <div className="Home-faqs-introduction__description">              1. Impermanent loss risk <br></br>
+              2. Price slippage risk <br></br>
+              3. Oracle risks (de-peg of price) <br></br>
+              4. Regulatory risks<br></br>
+              <br></br>
+              Among those risks, zkMX offers different approaches except Regulatory risks where thing are beyond our project design and efforts.<br></br>
+            </div>
+
+
+            <a href="https://info-194.gitbook.io/zkmx/" className="default-btn Home-faqs-documentation">Documentation</a>
           </div>
           <div className="Home-faqs-content-block">
             {
@@ -289,7 +464,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
                   <div className="Home-faqs-content-header">
                     <div className="Home-faqs-content-header__icon">
                       {
-                        openedFAQIndex === index ? <FiMinus className="opened" /> : <FiPlus className="closed" />
+                        openedFAQIndex
                       }
                     </div>
                     <div className="Home-faqs-content-header__text">
