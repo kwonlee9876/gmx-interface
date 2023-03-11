@@ -230,7 +230,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
   const getMemos = async () => {
     try {
       const { ethereum } = window;
-//       if (ethereum) {
+      if (ethereum) {
 //         const provider = new ethers.providers.Web3Provider(ethereum);
 //         const signer = provider.getSigner();
 //         const buyMeACoffee = new ethers.Contract(
