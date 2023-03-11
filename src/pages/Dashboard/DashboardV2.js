@@ -275,7 +275,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
           </div>
         </div>
       </div> */}
-      {/* <div className="Home-faqs-section">
+      <div className="Home-faqs-section">
         <div className="Home-faqs-container default-container">
           <div className="Home-faqs-introduction">
             <div className="Home-faqs-introduction__title">FAQs</div>
@@ -307,7 +307,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             }
           </div>
         </div>
-      </div> */}
+      </div>
       <Footer showRedirectModal={showRedirectModal} redirectPopupTimestamp={redirectPopupTimestamp} />
     </div>
   );
