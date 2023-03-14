@@ -7,7 +7,6 @@ import zkmxLogo from "img/zkmx.png";
 import simpleSwapIcon from "img/lightning-32x32-5388057.png";
 import costIcon from "img/calendar-check-32x32-5388026.png";
 import liquidityIcon from "img/layer-32x32-5388055.png";
-import clip from './video/sfd.mp4'
 import totaluserIcon from "img/calendar-check-32x32-5388026.png";
 
 import statsIcon from "img/ic_stats.svg";
