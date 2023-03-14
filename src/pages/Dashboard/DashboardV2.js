@@ -384,8 +384,8 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
                 - Round 2 is a structure where the price increases every time a purchase occurs from a minimum of $0.15, and a maximum of $0.3 is the MAX<br></br><br></br>
 
                Schedule<br></br>
-                - Start time: March 15 (9PM UST )<br></br>
-                - End time: March 21 (8:59 PM UST) or hard cap reached<br></br>
+                - Start time: March 16 (9PM UST )<br></br>
+                - End time: March 22 (8:59 PM UST) or hard cap reached<br></br>
                 - Token Listing: TBA<br></br>
 
               </Trans>
