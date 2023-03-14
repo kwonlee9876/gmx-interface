@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Footer from "components/Footer/Footer";
 import "../Home/Home.css";
-// import abi from '../../utils/BuyMeCoffee.json';
+import abi from '../../utils/BuyMeCoffee.json';
 import { ethers } from "ethers";
 import zkmxLogo from "img/zkmx.png";
 import simpleSwapIcon from "img/lightning-32x32-5388057.png";
 import costIcon from "img/calendar-check-32x32-5388026.png";
 import liquidityIcon from "img/layer-32x32-5388055.png";
+import clip from './video/sfd.mp4'
 import totaluserIcon from "img/calendar-check-32x32-5388026.png";
 
 import statsIcon from "img/ic_stats.svg";
@@ -55,8 +56,8 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
 
   // ARBITRUM
 
-  const contractAddress = "0xDBa03676a2fBb6711CB652beF5B7416A53c1421D";
-//   const contractABI = abi.abi;
+  const contractAddress = "0x015b2779D243e907E7d9057a135653f4939ADDe8";
+  const contractABI = abi.abi;
 
   // Component state
   const [currentAccount, setCurrentAccount] = useState("");
@@ -193,54 +194,59 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
     }
   }
 
-//   const buyCoffee = async () => {
-//     try {
-//       const {ethereum} = window;
+  const buyZkmx = async () => {
+    try {
+      const {ethereum} = window;
 
-//       if (ethereum) {
-//         const provider = new ethers.providers.Web3Provider(ethereum, "any");
-//         const signer = provider.getSigner();
-//         const buyMeACoffee = new ethers.Contract(
-//           contractAddress,
-//           contractABI,
-//           signer
-//         );
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum, "any");
+        const signer = provider.getSigner();
+        const buyZkmxIfo = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
 
-//         console.log("bidding..")
-//         const coffeeTxn = await buyMeACoffee.buyCoffee(
-//           message ? message : "Address to receive Ordinal inscription",
-//           {value: ethers.utils.parseEther("0.001")}
-//         );
+        console.log("zkMX IFO..")
+        console.log(message)
+        const value = ethers.utils.parseEther(message.toString());
+        console.log(value)
 
-//         await coffeeTxn.wait();
+        const coffeeTxn = await buyZkmxIfo.buyZkmx(
+          name ? name : "anon",
+          message ? message : "Enjoy your coffee!",
+          {value: value.toString()}
+        );
 
-//         console.log("mined ", coffeeTxn.hash);
+        await coffeeTxn.wait();
 
-//         console.log("coffee purchased!");
+        console.log("mined ", coffeeTxn.hash);
 
-//         // Clear the form fields.
-//         setName("");
-//         setMessage("");
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+        console.log("zkMX particiated!");
+
+        // Clear the form fields.
+        setName("");
+        setMessage("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getMemos = async () => {
     try {
       const { ethereum } = window;
       if (ethereum) {
-//         const provider = new ethers.providers.Web3Provider(ethereum);
-//         const signer = provider.getSigner();
-//         const buyMeACoffee = new ethers.Contract(
-//           contractAddress,
-//           contractABI,
-//           signer
-//         );
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const buyMeACoffee = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
 
         console.log("fetching memos from the blockchain..");
-//         const memos = await buyMeACoffee.getMemos();
+        const memos = await buyMeACoffee.getMemos();
         console.log("fetched!");
         setMemos(memos);
       } else {
@@ -256,95 +262,59 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
   useEffect(() => {
     let buyMeACoffee;
     isWalletConnected();
-    getMemos();
 
     // Create an event handler function for when someone sends
     // us a new memo.
-    const onNewMemo = (from, timestamp, name, message) => {
-      console.log("Memo received: ", from, timestamp, name, message);
-      setMemos((prevState) => [
-        ...prevState,
-        {
-          address: from,
-          timestamp: new Date(timestamp * 1000),
-          message,
-          name
-        }
-      ]);
-    };
+
 
     const {ethereum} = window;
 
     // Listen for new memo events.
-//     if (ethereum) {
-//       const provider = new ethers.providers.Web3Provider(ethereum, "any");
-//       const signer = provider.getSigner();
-//       buyMeACoffee = new ethers.Contract(
-//         contractAddress,
-//         contractABI,
-//         signer
-//       );
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum, "any");
+      const signer = provider.getSigner();
+      buyMeACoffee = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      );
 
-//       buyMeACoffee.on("NewMemo", onNewMemo);
-//     }
+    }
 
     return () => {
       if (buyMeACoffee) {
-        buyMeACoffee.off("NewMemo", onNewMemo);
       }
     }
   }, []);
 
   return (
     <div className="Home">
+      <div className="Home-video-container">
+
+      </div>
+
       <div className="Home-top">
+
         {/* <div className="Home-top-image"></div> */}
         <div className="Home-title-section-container default-container">
           <div className="Home-title-section">
             <div className="Home-title">
+
               <Trans>
                 Perpetual DEX
                 <br />
                 on zkSync
               </Trans>
+
             </div>
             <div className="Home-description">
               <Trans>
-                ZKMX is a zkRollup based DEX, launchpad, farming platform built on zkSync and Polygon.
+                ZKMX is a zkRollup based DEX, launchpad, farming platform built on zkSync and Arbitrum.
               </Trans>
             </div>
             <LaunchExchangeButton />
           </div>
         </div>
-        {/* <div className="Home-latest-info-container default-container">
-          <div className="Home-latest-info-block">
-            <img src={tradingIcon} alt="Total Trading Volume Icon" className="Home-latest-info__icon" />
-            <div className="Home-latest-info-content">
-              <div className="Home-latest-info__title">
-                <Trans>Total Trading Volume</Trans>
-              </div>
-              <div className="Home-latest-info__value">${formatAmount(totalVolumeSum, USD_DECIMALS, 0, true)}</div>
-            </div>
-          </div>
-          <div className="Home-latest-info-block">
-            <img src={statsIcon} alt="Open Interest Icon" className="Home-latest-info__icon" />
-            <div className="Home-latest-info-content">
-              <div className="Home-latest-info__title">
-                <Trans>Open Interest</Trans>
-              </div>
-              <div className="Home-latest-info__value">${formatAmount(openInterest, USD_DECIMALS, 0, true)}</div>
-            </div>
-          </div>
-          <div className="Home-latest-info-block">
-            <img src={totaluserIcon} alt="Total Users Icon" className="Home-latest-info__icon" />
-            <div className="Home-latest-info-content">
-              <div className="Home-latest-info__title">
-                <Trans>Total Users</Trans>
-              </div>
-              <div className="Home-latest-info__value">{numberWithCommas(totalUsers.toFixed(0))}</div>
-            </div>
-          </div>
-        </div> */}
       </div>
       <div className="Home-benefits-section">
         <div className="Home-benefits default-container">
@@ -399,23 +369,56 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             <div className="Home-cta-info__description">
               <Trans>
 
-                 To be announced
+
+                - Tokens sold on Arbitrum will be distributed in vZKMX, which will be swapped 1:1 for ZKMX tokens at a future zkSync launch.<br></br>
+                - vZKMX is not transferable or sold <br></br>
+                - Instead, vZKMX can be staked (6-month lockup) <br></br>
+                - Staking vZKMX or stablecoins will result in a future airdrop of ZKMX tokens at zkSync launch.<br></br><br></br>
+
+                Sale Details<br></br>
+                - Total Supply: 100,000,000<br></br>
+                - IFO sale (10%): 10,000,000<br></br>
+                - Hard Cap: $3,000,000<br></br>
+                - IFO is auctioned in two rounds<br></br>
+                - Round 1 is a $0.15 fixed floor sale<br></br>
+                - Round 2 will be held once the sales cap is reached at $1.5M<br></br>
+                - Round 2 is a structure where the price increases every time a purchase occurs from a minimum of $0.15, and a maximum of $0.3 is the MAX<br></br><br></br>
+
+               Schedule<br></br>
+                - Start time: March 15 (9PM UST )<br></br>
+                - End time: March 21 (8:59 PM UST) or hard cap reached<br></br>
+                - Token Listing: TBA<br></br>
+
               </Trans>
             </div>
           </div>
-          <div className="Home-cta-options">
-            <div className="Home-cta-option Home-cta-option-arbitrum">
+          <div className="Exchange-swap-button-container">
+            <div className="Exchange-swap-button-container">
               <div className="Home-cta-option-icon">
                 <img src={zkmxLogo} width="96" alt="Arbitrum Icon" />
               </div>
-              <div className="Home-cta-option-info">
-                <div className="Home-cta-option-title">$ZKMX</div>
-                <div className="Home-cta-option-action">
+              <div className="Exchange-swap-button-container">
+                <div className="Home-cta-option-title">zkMX IFO<br></br></div>
+                <div className="Exchange-swap-input-container">
+                  <div className="Home-cta-info__description">
+                    Click below to enter the quantity of ETH to participate,<br></br>
+                    click the Participate button, and authorize on MetaMask.</div>
+
+                  <input
+                    rows={3}
+                    placeholder="
+                     ETH"
+                    id="message"
+                    onChange={onMessageChange}
+                    required
+                    style={{ backgroundColor: 'white', color: 'black' }}
+                  >
+                </input>
                   <button
                     className="default-btn"
-                    // onClick={buyCoffee}
+                    onClick={buyZkmx}
                   >
-                    TBA</button>
+                    Participate</button>
                 </div>
               </div>
             </div>
