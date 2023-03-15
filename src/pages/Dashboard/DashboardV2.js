@@ -311,7 +311,6 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
                 ZKMX is a zkRollup based DEX, launchpad, farming platform built on zkSync and Arbitrum.
               </Trans>
             </div>
-             <LaunchExchangeButton />
           </div>
         </div>
       </div>
