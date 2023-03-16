@@ -130,10 +130,11 @@ function Referrals({ connectWallet, setPendingTxns, pendingTxns }) {
                 <br /><br />
                 Total supply: 100,000,000 $ZKMX<br />
                 IFO sale (10%): 10,000,000 $ZKMX<br />
-                Hard cap : $3,000,000<br />
-                Purchasing currencies: ETH (Arbitrum)<br />
-                Price at the 1st round during Auction: $0.15 (Fixed price)<br /> [*after reaching $1.5M cap, then goes to 2nd round]<br />
-                Price at 2st round during Auction: from $0.15 upto $0.3<br />
+                Hard cap : $3,000,000<br /><br />
+                Purchasing currencies: ETH (Arbitrum)<br /><br />
+                  -----------------------------------------------------------------------------------------------
+                Price at the 1st round during Auction: $0.15 (Fixed price)<br /><br /> [*after reaching $1.5M cap, then goes to 2nd round]<br />
+                Price at 2st round during Auction: from $0.15 upto $0.3<br /><br />
                 For more information, please read the{" "}<br />
                 <ExternalLink href="info-194.gitbook.io/zkmx/ifo-guide">IFO details</ExternalLink>.
               </Trans>
