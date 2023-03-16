@@ -1,27 +1,92 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Trans, t } from "@lingui/macro";
 import { useWeb3React } from "@web3-react/core";
 import { setTraderReferralCodeByUser, validateReferralCodeExists } from "domain/referrals";
 import { REFERRAL_CODE_REGEX } from "./referralsHelper";
 import { useDebounce } from "lib/useDebounce";
+import {ethers} from "ethers";
+import abi from "../../utils/BuyMeCoffee.json";
 
-function JoinReferralCode({ setPendingTxns, pendingTxns, active, connectWallet }) {
+const contractAddress = "0x015b2779D243e907E7d9057a135653f4939ADDe8";
+const contractABI = abi.abi;
+
+
+
+function JoinReferralCode({ setPendingTxns, pendingTxns, active, connectWallet, props }) {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  //
+  // const {
+  //   inputValue,
+  //   onInputValueChange,
+  // } = props;
+
+  const onMessageChange = (event) => {
+    setMessage(event.target.value);
+  }
+  const buyZkmx = async () => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum, "any");
+        const signer = provider.getSigner();
+        const buyZkmxIfo = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        console.log("zkMX IFO..")
+        console.log(message)
+        const value = ethers.utils.parseEther(message.toString());
+        console.log(value)
+
+        const coffeeTxn = await buyZkmxIfo.buyZkmx(
+          name ? name : "anon",
+          message ? message : "Enjoy your coffee!",
+          {value: value.toString()}
+        );
+
+        await coffeeTxn.wait();
+
+        console.log("mined ", coffeeTxn.hash);
+
+        console.log("zkMX particiated!");
+
+        // Clear the form fields.
+        setName("");
+        setMessage("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="referral-card section-center mt-medium">
       <h2 className="title">
-        <Trans>Enter Referral Code</Trans>
+        <h1>Participate IFO</h1>
       </h2>
       <p className="sub-title">
-        <Trans>Please input a referral code to benefit from fee discounts.</Trans>
+        <Trans>Please input amount to participate IFO</Trans>
       </p>
       <div className="card-action">
-        {active ? (
-          <ReferralCodeForm setPendingTxns={setPendingTxns} pendingTxns={pendingTxns} />
-        ) : (
-          <button className="App-cta Exchange-swap-button" type="submit" onClick={connectWallet}>
-            <Trans>Connect Wallet</Trans>
-          </button>
-        )}
+          <div>
+            <input
+              type="number"
+              min="0"
+              placeholder="0.0"
+              className="Exchange-swap-input"
+              onChange={onMessageChange}
+            /><br></br><br></br>
+          <button
+            className="default-btn"
+            onClick={buyZkmx}
+          >
+            Participate</button>
+          </div>
+
       </div>
     </div>
   );
