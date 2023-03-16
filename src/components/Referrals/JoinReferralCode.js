@@ -69,7 +69,7 @@ function JoinReferralCode({ setPendingTxns, pendingTxns, active, connectWallet, 
         <h1>Participate IFO</h1>
       </h2>
       <p className="sub-title">
-        <Trans>Please input amount to participate IFO</Trans>
+        <Trans>Please input ETH amount to participate IFO</Trans>
       </p>
       <div className="card-action">
           <div>
