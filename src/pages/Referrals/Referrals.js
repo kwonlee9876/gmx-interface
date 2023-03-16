@@ -32,6 +32,7 @@ const TRADERS = "Traders";
 const AFFILIATES = "Affiliates";
 const TAB_OPTIONS = [TRADERS, AFFILIATES];
 
+
 function Referrals({ connectWallet, setPendingTxns, pendingTxns }) {
   const { active, account: walletAccount, library } = useWeb3React();
   const { account: queryAccount } = useParams();
@@ -120,28 +121,20 @@ function Referrals({ connectWallet, setPendingTxns, pendingTxns }) {
           <div className="section-title-content">
             <div className="Page-title">
               <Trans>
-                Referrals <img width="24" src={networkIcon} alt="Network Icon" />
+                IFO (Initial Fair Launch)
               </Trans>
             </div>
             <div className="Page-description">
               <Trans>
-                Get fee discounts and earn rebates through the GMX referral program.
+                Terms of IFO
                 <br />
                 For more information, please read the{" "}
-                <ExternalLink href="https://gmxio.gitbook.io/gmx/referrals">referral program details</ExternalLink>.
+                <ExternalLink href="https://info-194.gitbook.io/zkmx/ifo-guide">IFO details</ExternalLink>.
               </Trans>
             </div>
           </div>
         </div>
-        <div className="referral-tab-container">
-          <Tab
-            options={TAB_OPTIONS}
-            optionLabels={TAB_OPTION_LABELS}
-            option={activeTab}
-            setOption={setActiveTab}
-            onChange={setActiveTab}
-          />
-        </div>
+
         {activeTab === AFFILIATES ? renderAffiliatesTab() : renderTradersTab()}
       </div>
       <Footer />
