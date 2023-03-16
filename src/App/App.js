@@ -509,7 +509,7 @@ function FullApp() {
               <Route exact path="/ecosystem">
                 <Ecosystem />
               </Route>
-              <Route exact path="/referrals">
+              <Route exact path="/ifo">
                 <Referrals pendingTxns={pendingTxns} connectWallet={connectWallet} setPendingTxns={setPendingTxns} />
               </Route>
               <Route exact path="/referrals/:account">
