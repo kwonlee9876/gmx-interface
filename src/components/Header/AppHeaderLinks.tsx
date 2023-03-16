@@ -60,11 +60,11 @@ export function AppHeaderLinks({
       </div>
       <div className="App-header-link-container">
         <HeaderLink
-          to="/referrals"
+          to="/ifo"
           redirectPopupTimestamp={redirectPopupTimestamp}
           showRedirectModal={showRedirectModal}
         >
-          <Trans>Referrals</Trans>
+          <Trans>IFO</Trans>
         </HeaderLink>
       </div>
       <div className="App-header-link-container">
