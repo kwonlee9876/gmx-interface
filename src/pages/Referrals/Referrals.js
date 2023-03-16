@@ -135,7 +135,7 @@ function Referrals({ connectWallet, setPendingTxns, pendingTxns }) {
                 Price at the 1st round during Auction: $0.15 (Fixed price) [*after reaching $1.5M cap, then goes to 2nd round]<br />
                 Price at 2st round during Auction: from $0.15 upto $0.3<br />
                 For more information, please read the{" "}<br />
-                <ExternalLink href="https://gmxio.gitbook.io/gmx/referrals">IFO details</ExternalLink>.
+                <ExternalLink href="info-194.gitbook.io/zkmx/ifo-guide">IFO details</ExternalLink>.
               </Trans>
             </div>
           </div>
