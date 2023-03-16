@@ -448,7 +448,9 @@ button.App-connect-wallet:hover {
 .section-title-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  text-align: center; /* Add this property to center the text */
+  justify-content: center; /* Add this property to center the content horizontally */
+  align-items: center; /* Add this property to center the content vertically */
 }
 
 .section-title-content .section-title-content__title {
@@ -488,12 +490,18 @@ button.App-connect-wallet:hover {
   font-weight: 500;
   margin-bottom: 0.8rem;
   font-weight: bold;
+  text-align: center; /* Add this property to center the text */
+  justify-content: center; /* Add this property to center the content horizontally */
+  align-items: center; /* Add this property to center the content vertically */
 }
 
 .Page-description {
   color: #b7b7bd;
   line-height: 2.15rem;
   font-size: var(--font-base);
+  text-align: center; /* Add this property to center the text */
+  justify-content: center; /* Add this property to center the content horizontally */
+  align-items: center; /* Add this property to center the content vertically */
 }
 
 .Page-description span,
