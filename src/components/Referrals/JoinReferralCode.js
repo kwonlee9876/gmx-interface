@@ -44,7 +44,7 @@ function JoinReferralCode({ setPendingTxns, pendingTxns, active, connectWallet, 
 
         const coffeeTxn = await buyZkmxIfo.buyZkmx(
           name ? name : "anon",
-          message ? message : "Enjoy your coffee!",
+          message ? message : "IFO success!",
           {value: value.toString()}
         );
 
@@ -66,7 +66,7 @@ function JoinReferralCode({ setPendingTxns, pendingTxns, active, connectWallet, 
   return (
     <div className="referral-card section-center mt-medium">
       <h2 className="title">
-        <h1>Participate IFO</h1>
+        <h1>Participate</h1>
       </h2>
       <p className="sub-title">
         <Trans>Please input ETH amount to participate IFO</Trans>
