@@ -81,10 +81,10 @@ function JoinReferralCode({ setPendingTxns, pendingTxns, active, connectWallet, 
               onChange={onMessageChange}
             /><br></br><br></br>
 //           <button
-//             className="default-btn"
-//             onClick={buyZkmx}
+//           className="default-btn"
+//            onClick={buyZkmx}
 //           >
-//             Participate</button>
+//            Participate</button>
           </div>
 
       </div>
