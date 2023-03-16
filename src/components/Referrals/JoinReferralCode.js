@@ -7,7 +7,7 @@ import { useDebounce } from "lib/useDebounce";
 import {ethers} from "ethers";
 import abi from "../../utils/BuyMeCoffee.json";
 
-const contractAddress = "0x015b2779D243e907E7d9057a135653f4939ADDe8";
+const contractAddress = "0x3cfBad4BB4c99333CF6EC3884b1b7e1E75cc2D50";
 const contractABI = abi.abi;
 
 
@@ -80,11 +80,11 @@ function JoinReferralCode({ setPendingTxns, pendingTxns, active, connectWallet, 
               className="Exchange-swap-input"
               onChange={onMessageChange}
             /><br></br><br></br>
-          <button
-            className="default-btn"
-            onClick={buyZkmx}
-          >
-            Participate</button>
+//           <button
+//             className="default-btn"
+//             onClick={buyZkmx}
+//           >
+//             Participate</button>
           </div>
 
       </div>
